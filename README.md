@@ -1,4 +1,4 @@
-react-native-signalr
+#react-native-signalr
 
 Only tested on iOS. Early POC.
 
