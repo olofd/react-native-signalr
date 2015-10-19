@@ -1,0 +1,15 @@
+{
+  "name": "react-native-signalr",
+  "version": "0.0.1",
+  "description": "Connect to a SignalR server from react-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Olof Dahlbom",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "ms-signalr-client": "^2.2.2"
+  }
+}
