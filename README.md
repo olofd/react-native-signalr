@@ -54,7 +54,7 @@ var {
 var AwesomeProject = React.createClass({
 
   componentDidMount : function(){
-    var connection = signalr.hubConnection('http://192.168.4.20:81');
+    var connection = signalr.hubConnection('http://<your-signalr-server-url>');
     connection.logging = true;
 
     var proxy = connection.createHubProxy('chatHub');
