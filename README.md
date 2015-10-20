@@ -1,36 +1,6 @@
 #react-native-signalr
 
-Only tested on iOS. Early POC.
-
-```
-import signalr from 'react-native-signalr';
-
-class ChatService{
-	constructor(){
-		this.connectToChatHub();
-	}
-
-	connectToChatHub(){
-		var connection = signalr.hubConnection('http://<your-signalr-server-url>');
-		connection.logging = true;
-
-		var proxy = connection.createHubProxy('chatHub');
-		 
-		// receives broadcast messages from a hub function, called "addMessage"
-		proxy.on('addMessage', (message) => {
-		    console.log(message);
-		    proxy.invoke('test', "hej");
-		});
-		 
-		// atempt connection, and handle errors
-		connection.start().done(() => { 
-			console.log('Now connected, connection ID=' + connection.id); 
-		});
-	}			
-}
-
-module.exports = new ChatService();
-```
+Only tested on iOS. Works well.
 
 
 #Awesome-project:
@@ -54,21 +24,47 @@ var {
 var AwesomeProject = React.createClass({
 
   componentDidMount : function(){
-    var connection = signalr.hubConnection('http://<your-signalr-server-url>');
-    connection.logging = true;
 
-    var proxy = connection.createHubProxy('chatHub');
-     
-    // receives broadcast messages from a hub function, called "addMessage"
-    proxy.on('addMessage', (message) => {
-        console.log(message);
-        proxy.invoke('test', "hej");
-    });
-     
-    // atempt connection, and handle errors
-    connection.start().done(() => { 
-      console.log('Now connected, connection ID=' + connection.id); 
-    });
+		var connection = signalr.hubConnection('http://<your-signalr-server-url>');
+		connection.logging = true;
+
+		var proxy = connection.createHubProxy('myHub');
+		 
+		//receives broadcast messages from a hub function, called "messageFromServer"
+		proxy.on('messageFromServer', (message) => {
+		    console.log(message);
+
+		    //Respond to message, invoke messageToServer on server with arg 'hej'
+		    let messagePromise = proxy.invoke('messageToServer', 'hej');
+
+		    //message-handling
+		    messagePromise.done(() => {
+			    console.log ('Invocation of NewContosoChatMessage succeeded');
+			}).fail(function (error) {
+			    console.log('Invocation of NewContosoChatMessage failed. Error: ' + error);
+			});
+		});
+		 
+
+
+		// atempt connection, and handle errors
+		connection.start().done(() => { 
+			console.log('Now connected, connection ID=' + connection.id); 
+		}).fail(() => {
+	      	console.log('Failed'); 
+	    });
+
+
+
+	    //connection-handling
+	    connection.connectionSlow(function () {
+	        console.log('We are currently experiencing difficulties with the connection.')
+	    });
+
+	    connection.error(function (error) {
+	      console.log('SignalR error: ' + error)
+	    });
+
   },
 
   render: function() {
