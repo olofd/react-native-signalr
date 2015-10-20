@@ -37,7 +37,7 @@ var AwesomeProject = React.createClass({
 		    //Respond to message, invoke messageToServer on server with arg 'hej'
 		    let messagePromise = proxy.invoke('messageToServer', 'hej');
 
-		    //message-handling
+		    //message-status-handling
 		    messagePromise.done(() => {
 			    console.log ('Invocation of NewContosoChatMessage succeeded');
 			}).fail(function (error) {
