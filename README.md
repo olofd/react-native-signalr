@@ -2,6 +2,11 @@
 
 Only tested on iOS. Works well.
 
+#Install:
+```
+npm i react-native-signalr
+```
+
 
 #Awesome-project:
 
