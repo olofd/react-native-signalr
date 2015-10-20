@@ -4,7 +4,7 @@ Only tested on iOS. Works well.
 
 #Install:
 ```
-npm i react-native-signalr
+npm i react-native-signalr --save
 ```
 
 
