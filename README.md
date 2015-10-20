@@ -1,10 +1,12 @@
 #react-native-signalr
 
 Connect to your SignalR-server with a active websocket-connection from react-native.
-Supports all errorhandling and reconnection including longpolling if needed.
+Supports all error-handling and reconnection, including longpolling if needed.
+
 Today the module shims the jQuery-dependency that signalr has.
 There is however an ongoing task upstream to remove this dependency.
-Does not pull in the entire jQuery-library. Only shimes the few methods SignalR needs.
+
+PS. Does NOT pull in the entire jQuery-library. Only shimes the few methods SignalR needs.
 Only tested on iOS. No known issues.
 
 #Install:
