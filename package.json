@@ -13,8 +13,6 @@
   "author": "Olof Dahlbom",
   "license": "MIT",
   "dependencies": {
-    "ms-signalr-client": "^2.2.2",
-    "superagent": "^1.4.0",
-    "superagent-bluebird-promise": "^2.1.0"
+    "ms-signalr-client": "^2.2.2"
   }
 }
