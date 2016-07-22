@@ -1,8 +1,6 @@
 let signalRHubConnectionFunc;
 let oldLogger = window.console.debug;
-window.document = {
-  readyState: 'complete'
-};
+
 if (!window.addEventListener) {
   window.addEventListener = window.addEventListener = () => {};
 }
@@ -21,6 +19,9 @@ module.exports = {
     window.console.debug = logger;
   },
   hubConnection: (serverUrl, options) => {
+    window.document = window.document || {
+      readyState: 'complete'
+    };
     if (!signalRHubConnectionFunc) {
       require('ms-signalr-client');
       signalRHubConnectionFunc = window.jQuery.hubConnection;
