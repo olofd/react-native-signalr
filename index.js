@@ -1,4 +1,4 @@
-let signalRHubConenctionFunc;
+let signalRHubConnectionFunc;
 let oldLogger = window.console.debug;
 window.document = {
   readyState: 'complete'
@@ -21,9 +21,9 @@ module.exports = {
     window.console.debug = logger;
   },
   hubConnection: (serverUrl, options) => {
-    if (!signalRHubConenctionFunc) {
+    if (!signalRHubConnectionFunc) {
       require('ms-signalr-client');
-      signalRHubConenctionFunc = window.jQuery.hubConnection;
+      signalRHubConnectionFunc = window.jQuery.hubConnection;
     }
     const protocol = serverUrl.split('//')[0];
     const host = serverUrl.split('//')[1];
@@ -44,6 +44,6 @@ module.exports = {
       window.jQuery.defaultAjaxHeaders = options.headers;
     }
 
-    return signalRHubConenctionFunc(serverUrl, options);
+    return signalRHubConnectionFunc(serverUrl, options);
   }
 };
