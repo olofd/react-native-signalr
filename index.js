@@ -1,8 +1,6 @@
-let signalRHubConenctionFunc;
+let signalRHubConnectionFunc;
 let oldLogger = window.console.debug;
-window.document = {
-  readyState: 'complete'
-};
+
 if (!window.addEventListener) {
   window.addEventListener = window.addEventListener = () => {};
 }
@@ -20,10 +18,13 @@ module.exports = {
     }
     window.console.debug = logger;
   },
-  hubConnection: (serverUrl, headers) => {
-    if (!signalRHubConenctionFunc) {
+  hubConnection: (serverUrl, options) => {
+    window.document = window.document || {
+      readyState: 'complete'
+    };
+    if (!signalRHubConnectionFunc) {
       require('ms-signalr-client');
-      signalRHubConenctionFunc = window.jQuery.hubConnection;
+      signalRHubConnectionFunc = window.jQuery.hubConnection;
     }
     const protocol = serverUrl.split('//')[0];
     const host = serverUrl.split('//')[1];
@@ -40,8 +41,10 @@ module.exports = {
       }
     };
 
-    window.jQuery.defaultAjaxHeaders = headers;
+    if (options && options.headers) {
+      window.jQuery.defaultAjaxHeaders = options.headers;
+    }
 
-    return signalRHubConenctionFunc(serverUrl);
+    return signalRHubConnectionFunc(serverUrl, options);
   }
 };
