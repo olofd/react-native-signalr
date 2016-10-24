@@ -17,7 +17,7 @@ npm i react-native-signalr --save
 
 #Awesome-project:
 
-```
+```javascript
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
