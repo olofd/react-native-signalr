@@ -32,6 +32,14 @@ export default function(subject) {
     triggerHandler(event, args) {
       let handlers = events[event] || [];
       handlers.forEach(fn => {
+        if(args === undefined) {
+          args = {
+            type: event
+          };
+        }
+        if(!Array.isArray(args)) {
+          args = [args];
+        }
         if (args && args[0] && args[0].type === undefined) {
           args = [{
             type: event
