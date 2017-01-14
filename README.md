@@ -14,6 +14,11 @@ Tested on iOS and Android. No known issues.
 npm i react-native-signalr --save
 ```
 
+##
+There is an example server setup at http://react-native-signalr.azurewebsites.net (no webite, only responds to signalr)
+If it's up and running, you can use it to debug against.
+You can find the source for that server under examples/server.
+The code below uses that server to setup a connection and communicate over websockets using signalr.
 
 #Awesome-project:
 
