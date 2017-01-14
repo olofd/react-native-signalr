@@ -6,8 +6,7 @@ Supports all error-handling and reconnection, including longpolling if needed.
 Today the module shims the jQuery-dependency that signalr has.
 There is however an ongoing task upstream to remove this dependency.
 
-PS. Does NOT pull in the entire jQuery-library. Only shimes the few methods SignalR needs.
-Tested on iOS and Android. No known issues.
+### Does NOT pull in the entire jQuery-library. Only shimes the few methods SignalR needs. Tested on iOS and Android. No known issues.
 
 #Install:
 ```
