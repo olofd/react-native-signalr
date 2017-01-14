@@ -8,7 +8,7 @@ export default function(options, data) {
     if (request.status === 200 && !request._hasError) {
       options.success && options.success(JSON.parse(request.responseText));
     } else {
-      options.error && options.error(request);
+      options.error && options.error(request, request._response);
     }
   };
 
@@ -16,6 +16,8 @@ export default function(options, data) {
   request.setRequestHeader('content-type', options.contentType);
 
   request.send(options.data.data && `data=${options.data.data}`);
+
+//  request.abort("__Negotiate Aborted__");
   
   return {
     abort: function(reason) {
