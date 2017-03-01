@@ -1,14 +1,14 @@
-export default function(options, data) {
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = (e) => {
+export default (options) => {
+  const request = new XMLHttpRequest();
+  request.onreadystatechange = () => {
     if (request.readyState !== 4) {
       return;
     }
 
-    if (request.status === 200 && !request._hasError) {
-      options.success && options.success(JSON.parse(request.responseText));
-    } else {
-      options.error && options.error(request, request._response);
+    if (request.status === 200 && !request._hasError && options.success) {
+      options.success(JSON.parse(request.responseText));
+    } else if (options.error) {
+       options.error(request, request._response);
     }
   };
 
@@ -17,10 +17,8 @@ export default function(options, data) {
 
   request.send(options.data.data && `data=${options.data.data}`);
 
-//  request.abort("__Negotiate Aborted__");
-  
   return {
-    abort: function(reason) {
+    abort: (reason) => {
       return request.abort(reason);
     }
   };

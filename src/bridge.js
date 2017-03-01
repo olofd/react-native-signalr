@@ -1,19 +1,19 @@
 //Arrange new state
-let oldDocument = window.document;
-let oldReadyState = window.document && window.document.readyState;
-let oldUserAgent = window.navigator.userAgent;
+const oldDocument = window.document;
+const oldReadyState = window.document && window.document.readyState;
+
 window.document = {
   readyState: 'complete'
 };
 window.addEventListener = () => {};
-window.navigator.userAgent = "react-native";
+window.navigator.userAgent = 'react-native';
 
 //Act
 window.jQuery = require('./signalr-jquery-polyfill.js');
 require('ms-signalr-client');
 
 //Restore old state
-let hubConnection = window.jQuery.hubConnection;
+const hubConnection = window.jQuery.hubConnection;
 window.jQuery = undefined;
 window.document = oldDocument;
 
@@ -22,19 +22,19 @@ if (oldReadyState) {
 }
 
 module.exports = {
-  hubConnection: (serverUrl, logger) => {
+  hubConnection: (serverUrl) => {
     const protocol = serverUrl.split('//')[0];
     const host = serverUrl.split('//')[1];
     window.location = {
-      protocol: protocol,
-      host: host
+      protocol,
+      host
     };
     window.document = {
-      createElement: function() {
+      createElement: () => {
         return {
-          protocol: protocol,
-          host: host
-        }
+          protocol,
+          host
+        };
       }
     };
     return hubConnection(serverUrl);
