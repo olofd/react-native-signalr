@@ -1,1 +1,3 @@
-export signalr from './src';
+import signalr from './src';
+
+export default signalr;

@@ -6,13 +6,12 @@ if (!window.addEventListener) {
 window.navigator.userAgent = 'react-native';
 window.jQuery = require('./signalr-jquery-polyfill.js');
 
-module.exports = {
+export default {
   setLogger: (logger) => {
     if (window.console && window.console.debug) {
-      window.console.debug("OVERWRITING CONSOLE.DEBUG in react-native-signalr");
+      window.console.debug('OVERWRITING CONSOLE.DEBUG in react-native-signalr');
     } else if (!window.console) {
         window.console = {};
-      }
     }
     window.console.debug = logger;
   },
@@ -20,6 +19,7 @@ module.exports = {
     window.document = window.document || { readyState: 'complete' };
     if (!signalRHubConnectionFunc) {
       require('ms-signalr-client');
+
       signalRHubConnectionFunc = window.jQuery.hubConnection;
     }
     const protocol = serverUrl.split('//')[0];
