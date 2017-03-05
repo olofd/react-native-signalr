@@ -21,7 +21,7 @@ if (oldReadyState) {
   window.document.readyState = oldReadyState;
 }
 
-module.exports = {
+export default {
   hubConnection: (serverUrl) => {
     const protocol = serverUrl.split('//')[0];
     const host = serverUrl.split('//')[1];

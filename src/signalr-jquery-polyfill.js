@@ -2,7 +2,7 @@ import jQuery from 'jquery-deferred';
 import jqueryFunction from './jquery-function';
 import ajax from './ajax';
 
-module.exports = jQuery.extend(
+export default (jQuery.extend(
   jqueryFunction,
   jQuery,
   {
@@ -16,4 +16,4 @@ module.exports = jQuery.extend(
       cors: true
     }
   }
-);
+));
