@@ -14,7 +14,7 @@ npm i react-native-signalr --save
 ```
 
 ##
-There is an example server setup at http://react-native-signalr.olofdahlbom.se (no webite, only responds to signalr)
+There is an example server setup at https://react-native-signalr.olofdahlbom.se (Also a http version but you must disable App security transport on iOS for that, read in issues) (no webite, only responds to signalr)
 If it's up and running, you can use it to debug against.
 You can find the source for that server under examples/server.
 The code below uses that server to setup a connection and communicate over websockets using signalr.
@@ -35,7 +35,7 @@ class AwesomeProject extends Component {
 
   componentDidMount() {
     //This is the server under /example/server published on azure.
-    const connection = signalr.hubConnection('http://react-native-signalr.olofdahlbom.se');
+    const connection = signalr.hubConnection('https://react-native-signalr.olofdahlbom.se');
     connection.logging = true;
 
     const proxy = connection.createHubProxy('chatHub');
