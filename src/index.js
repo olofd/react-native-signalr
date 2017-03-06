@@ -4,7 +4,7 @@ if (!window.addEventListener) {
   window.addEventListener = window.addEventListener = () => {};
 }
 window.navigator.userAgent = 'react-native';
-window.jQuery = require('./signalr-jquery-polyfill.js');
+window.jQuery = require('./signalr-jquery-polyfill.js').default;
 
 export default {
   setLogger: (logger) => {
