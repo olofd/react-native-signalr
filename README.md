@@ -21,7 +21,7 @@ The code below uses that server to setup a connection and communicate over webso
 
 #Awesome-project:
 
-~~~~~
+~~~js
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -109,11 +109,11 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   instructions: {
-    textAlign: 'center',
+    textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
 });
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
-~~~~~~
+~~~
