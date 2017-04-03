@@ -39,12 +39,11 @@ export default {
         protocol,
         host
       };
-
-      const returnValue = originalStart.apply(hubConnectionFunc, ...args);
+      const returnValue = originalStart.apply(hubConnectionFunc, args);
       window.document = undefined;
       return returnValue;
-
     };
+
     return hubConnectionFunc;
   }
 };
