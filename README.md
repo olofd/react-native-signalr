@@ -1,4 +1,4 @@
-#react-native-signalr
+# react-native-signalr
 
 Connect to your SignalR-server with a active websocket-connection from react-native.
 Supports all error-handling and reconnection, including longpolling if needed.
@@ -8,7 +8,7 @@ There is however an ongoing task upstream to remove this dependency.
 
 ### Does NOT pull in the entire jQuery-library. Only shimes the few methods SignalR needs. Tested on iOS and Android. No known issues.
 
-#Install:
+# Install:
 ```
 npm i react-native-signalr --save
 ```
@@ -19,7 +19,7 @@ If it's up and running, you can use it to debug against.
 You can find the source for that server under examples/server.
 The code below uses that server to setup a connection and communicate over websockets using signalr.
 
-#Awesome-project:
+# Awesome-project:
 
 ~~~js
 import React, { Component } from 'react';
