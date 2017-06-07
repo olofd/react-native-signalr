@@ -29,6 +29,7 @@ export default {
     const hubConnectionFunc = signalRHubConnectionFunc(serverUrl, options);
     const originalStart = hubConnectionFunc.start;
     hubConnectionFunc.start = (...args) => {
+      window.document = window.document || { readyState: 'complete' };
       window.document.createElement = () => {
         return {
           protocol,
