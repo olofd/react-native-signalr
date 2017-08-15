@@ -1,3 +1,10 @@
+const qs = (data) => {
+    let results = [];
+    for (const name in data)
+        results.push(`${name}=${encodeURIComponent(data[name])}`);
+    return results.join("&");
+}
+
 export default (options) => {
   const request = new XMLHttpRequest();
   request.onreadystatechange = () => {
@@ -15,7 +22,7 @@ export default (options) => {
   request.open(options.type, options.url);
   request.setRequestHeader('content-type', options.contentType);
 
-  request.send(options.data.data && `data=${options.data.data}`);
+  request.send(options.data && qs(options.data));
 
   return {
     abort: (reason) => {
