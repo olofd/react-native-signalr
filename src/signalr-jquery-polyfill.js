@@ -14,6 +14,13 @@ export default (jQuery.extend(
     makeArray: arr => [].slice.call(arr, 0),
     support: {
       cors: true
+    },
+    param: (source) => {
+      let array = []
+      for(var key in source) {
+        array.push(encodeURIComponent(key) + "=" + encodeURIComponent(source[key]))
+      }
+      return array.join("&")
     }
   }
 ));
