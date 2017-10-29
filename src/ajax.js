@@ -6,13 +6,18 @@ const qs = data => {
 
 export default (headers, options) => {
   const request = new XMLHttpRequest();
+  let aborted = false;
   request.onreadystatechange = () => {
-    if (request.readyState !== 4) {
+    if (request.readyState !== 4 || aborted) {
       return;
     }
 
     if (request.status === 200 && !request._hasError && options.success) {
-      options.success(JSON.parse(request.responseText));
+      try {
+        options.success(JSON.parse(request.responseText));
+      } catch (e) {
+        options.error(request, e);
+      }
     } else if (options.error) {
       options.error(request, request._response);
     }
@@ -38,6 +43,7 @@ export default (headers, options) => {
 
   return {
     abort: reason => {
+      aborted = true;
       return request.abort(reason);
     },
   };
