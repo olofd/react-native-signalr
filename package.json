@@ -13,7 +13,7 @@
   "author": "Olof Dahlbom",
   "license": "MIT",
   "dependencies": {
-    "ms-signalr-client": "^2.2.2",
-    "jquery-deferred": "^0.3.0"
+    "ms-signalr-client": "^2.2.7",
+    "jquery-deferred": "^0.3.1"
   }
 }

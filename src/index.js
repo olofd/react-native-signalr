@@ -1,50 +1,62 @@
 let signalRHubConnectionFunc;
 
+const makeSureDocument = () => {
+  const originalDocument = window.document;
+  window.document = window.document || { readyState: "complete" };
+  if (!window.document.readyState) {
+    window.document.readyState = "complete";
+  }
+  return () => (window.document = originalDocument);
+};
+
 if (!window.addEventListener) {
-  window.addEventListener = window.addEventListener = () => { };
+  window.addEventListener = window.addEventListener = () => {};
 }
-window.navigator.userAgent = 'react-native';
-window.jQuery = require('./signalr-jquery-polyfill.js').default;
+window.navigator.userAgent = window.navigator.userAgent || "react-native";
+window.jQuery = require("./signalr-jquery-polyfill.js").default;
 
 export default {
-  setLogger: (logger) => {
+  setLogger: logger => {
     if (window.console && window.console.debug) {
-      window.console.debug('OVERWRITING CONSOLE.DEBUG in react-native-signalr');
+      window.console.debug("OVERWRITING CONSOLE.DEBUG in react-native-signalr");
     } else if (!window.console) {
       window.console = {};
     }
+    const originalDebug = window.console.debug;
     window.console.debug = logger;
+    return () => (window.console.debug = originalDebug);
   },
   hubConnection: (serverUrl, options) => {
-    window.document = window.document || { readyState: 'complete' };
+    const revertDocument = makeSureDocument();
     if (!signalRHubConnectionFunc) {
-      require('ms-signalr-client');
+      require("ms-signalr-client");
       signalRHubConnectionFunc = window.jQuery.hubConnection;
     }
     const [protocol, host] = serverUrl.split(/\/\/|\//);
     if (options && options.headers) {
       window.jQuery.defaultAjaxHeaders = options.headers;
     }
-
     const hubConnectionFunc = signalRHubConnectionFunc(serverUrl, options);
     const originalStart = hubConnectionFunc.start;
-    hubConnectionFunc.start = (...args) => {
-      window.document = window.document || { readyState: 'complete' };
+    revertDocument();
+
+    hubConnectionFunc.start = (options, ...args) => {
+      const revertDocument = makeSureDocument();
       window.document.createElement = () => {
         return {
           protocol,
-          host
+          host,
         };
       };
       window.location = {
         protocol,
-        host
+        host,
       };
-      const returnValue = originalStart.apply(hubConnectionFunc, args);
-      window.document = undefined;
+      const returnValue = originalStart.call(hubConnectionFunc, options, ...args);
+      revertDocument();
       return returnValue;
     };
 
     return hubConnectionFunc;
-  }
+  },
 };
