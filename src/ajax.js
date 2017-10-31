@@ -1,7 +1,8 @@
 const qs = data => {
   let results = [];
-  for (const name in data) results.push(`${name}=${encodeURIComponent(data[name])}`);
-  return results.join("&");
+  for (const name in data)
+    results.push(`${name}=${encodeURIComponent(data[name])}`);
+  return results.join('&');
 };
 
 export default (headers, options) => {
@@ -24,7 +25,7 @@ export default (headers, options) => {
   };
 
   request.open(options.type, options.url);
-  request.setRequestHeader("content-type", options.contentType);
+  request.setRequestHeader('content-type', options.contentType);
 
   if (options.xhrFields) {
     Object.keys(options.xhrFields).forEach(key => {
@@ -39,7 +40,10 @@ export default (headers, options) => {
       request.setRequestHeader(key, value);
     });
   }
-  request.send(options.data && qs(options.data));
+
+  request.send(
+    options.type === 'POST' ? options.data && qs(options.data) : undefined,
+  );
 
   return {
     abort: reason => {
