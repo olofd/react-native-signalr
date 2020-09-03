@@ -38,6 +38,7 @@ export default {
     }
     const hubConnectionFunc = signalRHubConnectionFunc(serverUrl, options);
     const originalStart = hubConnectionFunc.start;
+    const originalStop = hubConnectionFunc.stop;
     revertDocument();
 
     hubConnectionFunc.start = (options, ...args) => {
@@ -53,6 +54,22 @@ export default {
         host,
       };
       const returnValue = originalStart.call(hubConnectionFunc, options, ...args);
+      revertDocument();
+      return returnValue;
+    };
+    hubConnectionFunc.stop = (options, ...args) => {
+      const revertDocument = makeSureDocument();
+      window.document.createElement = () => {
+        return {
+          protocol,
+          host,
+        };
+      };
+      window.location = {
+        protocol,
+        host,
+      };
+      const returnValue = originalStop.call(hubConnectionFunc, options, ...args);
       revertDocument();
       return returnValue;
     };
