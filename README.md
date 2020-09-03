@@ -1,3 +1,4 @@
+### Read me Example updated with onStop method [see how to use it]
 # react-native-signalr
 
 Connect to your SignalR-server with a active websocket-connection from react-native.
@@ -44,6 +45,9 @@ class AwesomeProject extends Component {
       console.log('message-from-server', argOne, argTwo, argThree, argFour);
       //Here I could response by calling something else on the server...
     });
+    
+    // to stop connection
+    connection.stop()
 
     // atempt connection, and handle errors
     connection.start().done(() => {
