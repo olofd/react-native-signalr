@@ -57,6 +57,8 @@ export default {
       revertDocument();
       return returnValue;
     };
+
+    // added ons top method
     hubConnectionFunc.stop = (options, ...args) => {
       const revertDocument = makeSureDocument();
       window.document.createElement = () => {
