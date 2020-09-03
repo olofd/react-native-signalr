@@ -47,7 +47,7 @@ class AwesomeProject extends Component {
     });
     
     // to stop connection
-    connection.onStop()
+    connection.stop()
 
     // atempt connection, and handle errors
     connection.start().done(() => {
