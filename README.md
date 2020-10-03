@@ -1,4 +1,4 @@
-### Read me Example updated with onStop method [see how to use it]
+### Read Example as updated with onStop method [see how to use it]
 # react-native-signalr
 
 Connect to your SignalR-server with a active websocket-connection from react-native.
