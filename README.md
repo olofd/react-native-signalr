@@ -1,4 +1,4 @@
-### Added Stop method for the connection see example [how to use it] & give it a star
+### Added Stop method for stopping the connection see example [how to use it] & give it a star
 # react-native-signalr
 
 Connect to your SignalR-server with a active websocket-connection from react-native.
@@ -7,7 +7,6 @@ Supports all error-handling and reconnection, including longpolling if needed.
 Today the module shims the jQuery-dependency that signalr has.
 There is however an ongoing task upstream to remove this dependency.
 
-### Does NOT pull in the entire jQuery-library. Only shimes the few methods SignalR needs. Tested on iOS and Android. No known issues.
 
 # Install:
 ```
